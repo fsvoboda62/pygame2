@@ -7,16 +7,20 @@ class Monster(pygame.sprite.Sprite):
 
     def __init__(self,game,type_monster):
         super().__init__()
-        self.health = 25
+        pygame.mixer.music.load("assets/sounds/mummy-2.ogg")
+        pygame.mixer.music.play()
+        self.health = 100
+        self.max_health = 100
         self.attack = 10
         self.velocity = randint(1,4)
         self.marche=1
+        self.scale = 150
         self.image = pygame.image.load(f"assets/mummy.png")
-        self.image = pygame.transform.scale(self.image,(180,180))
+        self.image = pygame.transform.scale(self.image,(self.scale,self.scale))
         self.images = []
         self.rect = self.image.get_rect()
         #self.rect.x = 1080
-        self.rect.y = 490
+        self.rect.y = 520
         self.x_max = 1080
         self.x_min = -200
         self.game = game
@@ -27,7 +31,11 @@ class Monster(pygame.sprite.Sprite):
             self.rect.x = self.x_min
             self.image = pygame.transform.flip(self.image, True, False)
         self.set_images()
-    
+
+    def barprogress(self):
+        self.image.fill(pygame.Color(255, 117, 26), rect= [40,0,self.health,8])
+        self.image.fill(pygame.Color(77, 31, 0), rect= [40+self.health,0,self.max_health-self.health,8])       
+
     def set_images(self):
         for i in range(1,25):
             self.images.append(pygame.image.load(f"assets/mummy/mummy{i}.png"))
@@ -51,7 +59,8 @@ class Monster(pygame.sprite.Sprite):
             if self.marche == 24:
                 self.marche = 0
             self.image = self.images[self.marche]
-            self.image = pygame.transform.scale(self.image,(180,180))
+            self.image = pygame.transform.scale(self.image,(self.scale,self.scale))
+            self.barprogress()
 
             if self.type_monster == 1:
                 self.rect.x -= self.velocity

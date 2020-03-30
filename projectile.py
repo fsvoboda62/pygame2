@@ -8,7 +8,7 @@ class Projectile(pygame.sprite.Sprite):
         pygame.mixer.music.load("assets/sounds/tir.ogg")
         pygame.mixer.music.play()
         self.velocity = 12
-        self.attack = 5
+        self.attack = 25
         self.image = pygame.image.load("assets/projectile.png")
         self.image = pygame.transform.scale(self.image,(50,50))
         self.image_origin = self.image

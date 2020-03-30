@@ -4,6 +4,8 @@ from projectile import Projectile
 #class du joueur
 class Player(pygame.sprite.Sprite):
 
+
+
     def __init__(self,game):
         super().__init__()
         self.health = 100
@@ -21,13 +23,18 @@ class Player(pygame.sprite.Sprite):
         self.x_min = 5
         self.all_projectiles = pygame.sprite.Group()
         self.game=game
+        self.barprogress()
+
+    def barprogress(self):
+        self.image.fill(pygame.Color(0, 204, 0), rect= [40,20,self.health,8])
+        self.image.fill(pygame.Color(0, 51, 0), rect= [40+self.health,20,self.max_health-self.health,8])       
         
 
     def set_images(self):
         for i in range(1,25):
-            self.images.append(pygame.image.load(f"assets/player/player{i}.png"))
+            self.images.append(pygame.image.load(f"assets/player/player{i}.png").convert_alpha())
 
-    def init_image(self,flip : "retourner l'image - True image retournée sinon False") -> pygame.image: # une image de pygame
+    def init_image(self,flip : "retourner l'image - True image retournée sinon False") : # une image de pygame
         image = pygame.image.load("assets/player/player1.png") 
         if flip:
             image = pygame.transform.flip(image, True, False)
@@ -60,6 +67,7 @@ class Player(pygame.sprite.Sprite):
             self.image = self.init_image(False)
             if type == 2:
                 self.image = pygame.transform.flip(self.image, True, False)
+            self.barprogress()
             self.all_projectiles.add(Projectile(self,type))
 
     def move_right(self):
@@ -67,9 +75,11 @@ class Player(pygame.sprite.Sprite):
         if not self.game.check_collision(self,self.game.all_monsters):
             if self.rect.x<=self.x_max:
                 self.rect.x += self.velocity
+        self.barprogress()
 
     def move_left(self):
         self.image = self.init_image(True)
 #        if not self.game.check_collision(self,self.game.all_monsters):
         if self.rect.x>=self.x_min:
             self.rect.x -= self.velocity
+        self.barprogress()

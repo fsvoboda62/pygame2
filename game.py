@@ -8,6 +8,7 @@ class Game():
 
     def __init__(self,screen):
         #ajout d'un joueur
+        self.screen = screen
         self.player = Player(self)
         self.all_players = pygame.sprite.Group()
         self.all_players.add(self.player)
@@ -17,7 +18,7 @@ class Game():
         self.running = True
         self.point = 0
         self.sound_Game_Over = pygame.mixer.Sound("assets/sounds/game_over.ogg")
-        self.screen = screen
+        
         self.niveau = 1
         self.mode = 1
 
