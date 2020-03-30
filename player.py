@@ -46,7 +46,7 @@ class Player(pygame.sprite.Sprite):
         self.health -= objet.attack
         if self.health <= 0:
             print("Je suis mort... GAME OVER")
-            self.game.running = False
+            self.game.game_over = True
 
     def ajoute_vie(self):
         self.health += self.health_bonus

@@ -16,11 +16,15 @@ class Game():
         self.all_meteorites = pygame.sprite.Group()
         self.pressed={}
         self.running = True
+        self.game_over = False
         self.point = 0
         self.sound_Game_Over = pygame.mixer.Sound("assets/sounds/game_over.ogg")
-        
+        self.play_song = True
         self.niveau = 1
         self.mode = 1
+    
+    def __del__(self):
+        print("dans le destructeur")
 
     def check_collision(self,sprite,group):
         return pygame.sprite.spritecollide(sprite, group, False, pygame.sprite.collide_mask)
