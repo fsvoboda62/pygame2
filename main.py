@@ -15,9 +15,12 @@ screen = pygame.display.set_mode(windows_resolution)
 
 #fond du jeux
 background = pygame.image.load('assets/bg.jpg')
+banner = pygame.image.load('assets/banner.png')
+angle = 0
 
 #Font de score et vie
 arial_font = pygame.font.SysFont("arial",36)
+text_replay = arial_font.render(f"C pour continuer et X pour recommencer", True, color_score)
 
 #charger le joueur
 game=Game(screen)
@@ -33,11 +36,18 @@ def gameplay():
             if game.play_song:
                 game.sound_Game_Over.play()
                 game.play_song = False
+            bannerR = pygame.transform.rotate(banner, angle)
+            screen.blit(bannerR, (120,-50))
+            screen.blit(text_replay, (275,610))
+            pygame.display.flip()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     game.running = False
                     game.game_over = False
                 elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_c:
+                        game.player.health = game.player.max_health    
+                        game.game_over = False
                     if event.key == pygame.K_x:
                         game.__init__(screen)
                         # game=Game(screen)

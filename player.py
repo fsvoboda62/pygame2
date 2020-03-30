@@ -8,9 +8,9 @@ class Player(pygame.sprite.Sprite):
 
     def __init__(self,game):
         super().__init__()
-        self.health = 100
         self.max_health = 100
-        self.health_bonus = 30
+        self.health = self.max_health
+        self.health_bonus = 15
         self.velocity = 10
         self.max_projectile = 4
         self.image = self.init_image(False)

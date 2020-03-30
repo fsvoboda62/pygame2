@@ -12,7 +12,7 @@ class Monster(pygame.sprite.Sprite):
         self.health = 100
         self.max_health = 100
         self.attack = 10
-        self.velocity = randint(1,4)
+        self.velocity = randint(2,4)
         self.marche=1
         self.scale = 150
         self.image = pygame.image.load(f"assets/mummy.png")
@@ -72,7 +72,7 @@ class Monster(pygame.sprite.Sprite):
                 if self.rect.x > self.x_max:
                     self.remove()
             self.barprogress()
-            
+
         else:
             print("collision monster avec player")
             self.game.player.touched(self)
