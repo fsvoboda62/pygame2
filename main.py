@@ -92,9 +92,7 @@ while game.running:
 
     game.all_monsters.draw(screen)
     game.all_meteorites.draw(screen)
-    
-
-
+   
     #mise a jour de l'ecran
     pygame.display.flip()
 

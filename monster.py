@@ -60,7 +60,7 @@ class Monster(pygame.sprite.Sprite):
                 self.marche = 0
             self.image = self.images[self.marche]
             self.image = pygame.transform.scale(self.image,(self.scale,self.scale))
-            self.barprogress()
+            
 
             if self.type_monster == 1:
                 self.rect.x -= self.velocity
@@ -71,6 +71,8 @@ class Monster(pygame.sprite.Sprite):
                 self.rect.x += self.velocity
                 if self.rect.x > self.x_max:
                     self.remove()
+            self.barprogress()
+            
         else:
             print("collision monster avec player")
             self.game.player.touched(self)
